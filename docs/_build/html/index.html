@@ -1,0 +1,337 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>binary_morphology &mdash; binary_morphology 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="binary_morphology 0.1 documentation" href="#" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="#">binary_morphology 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+<div class="section" id="module-binary_morphology">
+<span id="binary-morphology"></span><h1><a class="reference internal" href="#module-binary_morphology" title="binary_morphology"><tt class="xref py py-mod docutils literal"><span class="pre">binary_morphology</span></tt></a><a class="headerlink" href="#module-binary_morphology" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt>
+<tt class="descname">close(A, struct=array([[0, 1, 0],</tt></dt>
+<dt>
+<tt class="descname">[1, 1, 1],</tt></dt>
+<dt>
+<tt class="descname">[0, 1, 0]]))</tt></dt>
+<dd><p>Apply morphological <em>closing</em> to the input array.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><ul class="first last">
+<li><p class="first">A (numpy.ndarray): The input array.</p>
+</li>
+<li><p class="first">struct (np.mdarray): (Optional) The morphological structuring element.
+Currently only 3x3 structs are supported.  If no struct is provided, 
+the following default will be used:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="binary_morphology.complement">
+<tt class="descclassname">binary_morphology.</tt><tt class="descname">complement</tt><big>(</big><em>A</em>, <em>B</em><big>)</big><a class="reference internal" href="_modules/binary_morphology.html#complement"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#binary_morphology.complement" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the <em>relative complement</em> of B in A.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="binary_morphology.difference">
+<tt class="descclassname">binary_morphology.</tt><tt class="descname">difference</tt><big>(</big><em>A</em>, <em>B</em><big>)</big><a class="reference internal" href="_modules/binary_morphology.html#difference"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#binary_morphology.difference" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the <em>symmetric difference</em> of A and B.</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<tt class="descname">dilate(A, struct=array([[0, 1, 0],</tt></dt>
+<dt>
+<tt class="descname">[1, 1, 1],</tt></dt>
+<dt>
+<tt class="descname">[0, 1, 0]]))</tt></dt>
+<dd><p>Apply morphological <em>dilation</em> to the input array.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><ul class="first last">
+<li><p class="first">A (numpy.ndarray): The input array.</p>
+</li>
+<li><p class="first">struct (np.mdarray): (Optional) The morphological structuring element.
+Currently only 3x3 structs are supported.  If no struct is provided, 
+the following default will be used:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</dd>
+<dt>Raises:</dt>
+<dd><ul class="first last simple">
+<li>ValueError: The shape of the structuring element is not 3x3.</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="binary_morphology.equals">
+<tt class="descclassname">binary_morphology.</tt><tt class="descname">equals</tt><big>(</big><em>A</em>, <em>B</em><big>)</big><a class="reference internal" href="_modules/binary_morphology.html#equals"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#binary_morphology.equals" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the arrays are equal, False otherwise.</p>
+<dl class="docutils">
+<dt>Raises:</dt>
+<dd>ValueError: The input arrays do not have the same shape.</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<tt class="descname">erode(A, struct=array([[0, 1, 0],</tt></dt>
+<dt>
+<tt class="descname">[1, 1, 1],</tt></dt>
+<dt>
+<tt class="descname">[0, 1, 0]]))</tt></dt>
+<dd><p>Apply morphological <em>erosion</em> to the input array.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><ul class="first last">
+<li><p class="first">A (numpy.ndarray): The input array.</p>
+</li>
+<li><p class="first">struct (np.mdarray): (Optional) The morphological structuring element.
+Currently only 3x3 structs are supported.  If no struct is provided, 
+the following default will be used:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</dd>
+<dt>Raises:</dt>
+<dd><ul class="first last simple">
+<li>ValueError: The shape of the structuring element is not 3x3.</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="binary_morphology.fill_holes">
+<tt class="descclassname">binary_morphology.</tt><tt class="descname">fill_holes</tt><big>(</big><em>A</em>, <em>connectivity=8</em><big>)</big><a class="reference internal" href="_modules/binary_morphology.html#fill_holes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#binary_morphology.fill_holes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a copy of A with all holes filled in.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="binary_morphology.intersection">
+<tt class="descclassname">binary_morphology.</tt><tt class="descname">intersection</tt><big>(</big><em>A</em>, <em>B</em><big>)</big><a class="reference internal" href="_modules/binary_morphology.html#intersection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#binary_morphology.intersection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the <em>intersection</em> of the input arrays.</p>
+<dl class="docutils">
+<dt>Raises:</dt>
+<dd>ValueError: The input arrays do not have the same shape.</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="binary_morphology.invert">
+<tt class="descclassname">binary_morphology.</tt><tt class="descname">invert</tt><big>(</big><em>A</em><big>)</big><a class="reference internal" href="_modules/binary_morphology.html#invert"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#binary_morphology.invert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the <em>inverse</em> of the input array.</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<tt class="descname">open(A, struct=array([[0, 1, 0],</tt></dt>
+<dt>
+<tt class="descname">[1, 1, 1],</tt></dt>
+<dt>
+<tt class="descname">[0, 1, 0]]))</tt></dt>
+<dd><p>Apply morphological <em>opening</em> to the input array.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><ul class="first last">
+<li><p class="first">A (numpy.ndarray): The input array.</p>
+</li>
+<li><p class="first">struct (np.mdarray): (Optional) The morphological structuring element.
+Currently only 3x3 structs are supported.  If no struct is provided, 
+the following default will be used:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="binary_morphology.outline">
+<tt class="descclassname">binary_morphology.</tt><tt class="descname">outline</tt><big>(</big><em>A</em><big>)</big><a class="reference internal" href="_modules/binary_morphology.html#outline"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#binary_morphology.outline" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the outline of the input array.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="binary_morphology.pad">
+<tt class="descclassname">binary_morphology.</tt><tt class="descname">pad</tt><big>(</big><em>A</em>, <em>val=0</em>, <em>width=1</em><big>)</big><a class="reference internal" href="_modules/binary_morphology.html#pad"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#binary_morphology.pad" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pad the input array. e.g.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">default_struct</span>
+<span class="go">array([[0, 1, 0]</span>
+<span class="go">       [1, 1, 1]</span>
+<span class="go">       [0, 1, 0]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pad</span><span class="p">(</span><span class="n">default_struct</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">array([[0, 0, 0, 0, 0, 0, 0]</span>
+<span class="go">       [0, 0, 0, 0, 0, 0, 0]</span>
+<span class="go">       [0, 0, 0, 1, 0, 0, 0]</span>
+<span class="go">       [0, 0, 1, 1, 1, 0, 0]</span>
+<span class="go">       [0, 0, 0, 1, 0, 0, 0]</span>
+<span class="go">       [0, 0, 0, 0, 0, 0, 0]</span>
+<span class="go">       [0, 0, 0, 0, 0, 0, 0]])</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><ul class="first last simple">
+<li>A (numpy.ndarray): The input array.</li>
+<li>val (int): (Optional) The value used to pad the array.  0 is used if 
+no value is provided.</li>
+<li>width (int): (Optional) The number of rows and columns of padding to 
+add.  1 row and column is added if no width is provided.</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="binary_morphology.stretch">
+<tt class="descclassname">binary_morphology.</tt><tt class="descname">stretch</tt><big>(</big><em>A</em>, <em>scale</em><big>)</big><a class="reference internal" href="_modules/binary_morphology.html#stretch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#binary_morphology.stretch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stretch the input array.</p>
+<p>FIXME: Does this live in this library ?</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><ul class="first last simple">
+<li>A (numpy.ndarray): The input array.</li>
+<li>scale (tuple): The amount the stretch in (x, y).</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="binary_morphology.union">
+<tt class="descclassname">binary_morphology.</tt><tt class="descname">union</tt><big>(</big><em>A</em>, <em>B</em><big>)</big><a class="reference internal" href="_modules/binary_morphology.html#union"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#binary_morphology.union" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the <em>union</em> of the input arrays.</p>
+<dl class="docutils">
+<dt>Raises:</dt>
+<dd>ValueError: The input arrays do not have the same shape.</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><em>Index</em></a></li>
+<li><a class="reference internal" href="search.html"><em>Search Page</em></a></li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="#">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><tt class="docutils literal"><span class="pre">binary_morphology</span></tt></a></li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="#">binary_morphology 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Tom Myers.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,331 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>binary_morphology &mdash; binary_morphology 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="binary_morphology 0.1 documentation" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">binary_morphology 0.1 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for binary_morphology</h1><div class="highlight"><pre>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">import</span> <span class="n">figure</span><span class="p">,</span> <span class="n">ion</span>
+
+<span class="n">default_struct</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span>
+                           <span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span>
+                           <span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+
+<div class="viewcode-block" id="invert"><a class="viewcode-back" href="../index.html#binary_morphology.invert">[docs]</a><span class="k">def</span> <span class="nf">invert</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Returns the *inverse* of the input array. &quot;&quot;&quot;</span>
+    <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="n">arr</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">A</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="n">arr</span>
+</div>
+<div class="viewcode-block" id="union"><a class="viewcode-back" href="../index.html#binary_morphology.union">[docs]</a><span class="k">def</span> <span class="nf">union</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return the *union* of the input arrays.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: The input arrays do not have the same shape.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">B</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;Arrays must be the same shape.&#39;</span><span class="p">)</span>
+    <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="n">arr</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">B</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">arr</span>
+</div>
+<div class="viewcode-block" id="intersection"><a class="viewcode-back" href="../index.html#binary_morphology.intersection">[docs]</a><span class="k">def</span> <span class="nf">intersection</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return the *intersection* of the input arrays.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: The input arrays do not have the same shape.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">B</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;Arrays must be the same shape.&#39;</span><span class="p">)</span>
+    <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="n">arr</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">B</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="n">arr</span>
+</div>
+<div class="viewcode-block" id="equals"><a class="viewcode-back" href="../index.html#binary_morphology.equals">[docs]</a><span class="k">def</span> <span class="nf">equals</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns True if the arrays are equal, False otherwise.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: The input arrays do not have the same shape.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">B</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;Arrays must be the same shape.&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">A</span> <span class="o">==</span> <span class="n">B</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="complement"><a class="viewcode-back" href="../index.html#binary_morphology.complement">[docs]</a><span class="k">def</span> <span class="nf">complement</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Returns the *relative complement* of B in A. &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">intersection</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">invert</span><span class="p">(</span><span class="n">B</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="difference"><a class="viewcode-back" href="../index.html#binary_morphology.difference">[docs]</a><span class="k">def</span> <span class="nf">difference</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Returns the *symmetric difference* of A and B. &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">union</span><span class="p">(</span><span class="n">complement</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">),</span> <span class="n">complement</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">A</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="pad"><a class="viewcode-back" href="../index.html#binary_morphology.pad">[docs]</a><span class="k">def</span> <span class="nf">pad</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Pad the input array. e.g.</span>
+
+<span class="sd">        &gt;&gt;&gt; default_struct</span>
+<span class="sd">        array([[0, 1, 0]</span>
+<span class="sd">               [1, 1, 1]</span>
+<span class="sd">               [0, 1, 0]])</span>
+<span class="sd">        &gt;&gt;&gt; pad(default_struct, val = 0, width = 2)</span>
+<span class="sd">        array([[0, 0, 0, 0, 0, 0, 0]</span>
+<span class="sd">               [0, 0, 0, 0, 0, 0, 0]</span>
+<span class="sd">               [0, 0, 0, 1, 0, 0, 0]</span>
+<span class="sd">               [0, 0, 1, 1, 1, 0, 0]</span>
+<span class="sd">               [0, 0, 0, 1, 0, 0, 0]</span>
+<span class="sd">               [0, 0, 0, 0, 0, 0, 0]</span>
+<span class="sd">               [0, 0, 0, 0, 0, 0, 0]])</span>
+<span class="sd">    Args:</span>
+<span class="sd">        * A (numpy.ndarray): The input array.</span>
+<span class="sd">        * val (int): (Optional) The value used to pad the array.  0 is used if </span>
+<span class="sd">          no value is provided.</span>
+<span class="sd">        * width (int): (Optional) The number of rows and columns of padding to </span>
+<span class="sd">          add.  1 row and column is added if no width is provided.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">col</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">width</span><span class="p">),</span> <span class="n">dtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">)</span>
+    <span class="n">row</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">width</span><span class="p">,</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">width</span><span class="o">*</span><span class="mi">2</span><span class="p">),</span> <span class="n">dtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">val</span><span class="p">:</span>
+        <span class="n">col</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+        <span class="n">row</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+
+    <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">((</span><span class="n">col</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">col</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">row</span><span class="p">,</span> <span class="n">arr</span><span class="p">,</span> <span class="n">row</span><span class="p">))</span>
+</div>
+<span class="k">def</span> <span class="nf">dilate</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">struct</span> <span class="o">=</span> <span class="n">default_struct</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Apply morphological *dilation* to the input array.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        * A (numpy.ndarray): The input array.</span>
+<span class="sd">        * struct (np.mdarray): (Optional) The morphological structuring element.</span>
+<span class="sd">          Currently only 3x3 structs are supported.  If no struct is provided, </span>
+<span class="sd">          the following default will be used::</span>
+
+<span class="sd">            [[0, 1, 0]</span>
+<span class="sd">             [1, 1, 1]</span>
+<span class="sd">             [0, 1, 0]]</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        * ValueError: The shape of the structuring element is not 3x3.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">struct</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">3</span> <span class="ow">and</span> <span class="n">struct</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">3</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;Currently only supports 3x3 structuring elements.&#39;</span><span class="p">)</span>
+
+    <span class="n">A</span> <span class="o">=</span> <span class="n">pad</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">A</span><span class="p">[</span><span class="n">row</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">col</span><span class="o">+</span><span class="mi">1</span><span class="p">]:</span>
+                <span class="n">arr</span><span class="p">[</span><span class="n">row</span><span class="p">:</span><span class="n">row</span><span class="o">+</span><span class="mi">3</span><span class="p">,</span> <span class="n">col</span><span class="p">:</span><span class="n">col</span><span class="o">+</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">union</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="n">row</span><span class="p">:</span><span class="n">row</span><span class="o">+</span><span class="mi">3</span><span class="p">,</span> <span class="n">col</span><span class="p">:</span><span class="n">col</span><span class="o">+</span><span class="mi">3</span><span class="p">],</span> <span class="n">struct</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">arr</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">erode</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">struct</span> <span class="o">=</span> <span class="n">default_struct</span><span class="p">):</span> 
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Apply morphological *erosion* to the input array.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        * A (numpy.ndarray): The input array.</span>
+<span class="sd">        * struct (np.mdarray): (Optional) The morphological structuring element.</span>
+<span class="sd">          Currently only 3x3 structs are supported.  If no struct is provided, </span>
+<span class="sd">          the following default will be used::</span>
+
+<span class="sd">            [[0, 1, 0]</span>
+<span class="sd">             [1, 1, 1]</span>
+<span class="sd">             [0, 1, 0]]</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        * ValueError: The shape of the structuring element is not 3x3.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">struct</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">3</span> <span class="ow">and</span> <span class="n">struct</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">3</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;Currently only supports 3x3 structuring elements.&#39;</span><span class="p">)</span>
+
+    <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">pad</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="p">):</span>
+            <span class="n">arr</span><span class="p">[</span><span class="n">row</span><span class="p">,</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">equals</span><span class="p">(</span><span class="n">struct</span><span class="p">,</span> <span class="n">intersection</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">row</span><span class="p">:</span><span class="n">row</span><span class="o">+</span><span class="mi">3</span><span class="p">,</span> <span class="n">col</span><span class="p">:</span><span class="n">col</span><span class="o">+</span><span class="mi">3</span><span class="p">],</span> <span class="n">struct</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">arr</span>
+
+
+<span class="k">def</span> <span class="nf">open</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">struct</span> <span class="o">=</span> <span class="n">default_struct</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Apply morphological *opening* to the input array.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        * A (numpy.ndarray): The input array.</span>
+<span class="sd">        * struct (np.mdarray): (Optional) The morphological structuring element.</span>
+<span class="sd">          Currently only 3x3 structs are supported.  If no struct is provided, </span>
+<span class="sd">          the following default will be used::</span>
+
+<span class="sd">            [[0, 1, 0]</span>
+<span class="sd">             [1, 1, 1]</span>
+<span class="sd">             [0, 1, 0]]</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">dilate</span><span class="p">(</span><span class="n">erode</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">struct</span><span class="p">),</span> <span class="n">struct</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">struct</span> <span class="o">=</span> <span class="n">default_struct</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Apply morphological *closing* to the input array.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        * A (numpy.ndarray): The input array.</span>
+<span class="sd">        * struct (np.mdarray): (Optional) The morphological structuring element.</span>
+<span class="sd">          Currently only 3x3 structs are supported.  If no struct is provided, </span>
+<span class="sd">          the following default will be used::</span>
+
+<span class="sd">            [[0, 1, 0]</span>
+<span class="sd">             [1, 1, 1]</span>
+<span class="sd">             [0, 1, 0]]</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">erode</span><span class="p">(</span><span class="n">dilate</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">struct</span><span class="p">),</span> <span class="n">struct</span><span class="p">)</span>
+
+<div class="viewcode-block" id="outline"><a class="viewcode-back" href="../index.html#binary_morphology.outline">[docs]</a><span class="k">def</span> <span class="nf">outline</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Returns the outline of the input array. &quot;&quot;&quot;</span>
+    <span class="n">struct</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">complement</span><span class="p">(</span><span class="n">dilate</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">struct</span><span class="p">),</span> <span class="n">A</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="stretch"><a class="viewcode-back" href="../index.html#binary_morphology.stretch">[docs]</a><span class="k">def</span> <span class="nf">stretch</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">scale</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Stretch the input array.</span>
+
+<span class="sd">    FIXME: Does this live in this library ?</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        * A (numpy.ndarray): The input array.</span>
+<span class="sd">        * scale (tuple): The amount the stretch in (x, y).</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">xscale</span><span class="p">,</span> <span class="n">yscale</span> <span class="o">=</span> <span class="n">scale</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">yscale</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="n">xscale</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="fill_holes"><a class="viewcode-back" href="../index.html#binary_morphology.fill_holes">[docs]</a><span class="k">def</span> <span class="nf">fill_holes</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">connectivity</span> <span class="o">=</span> <span class="mi">8</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Returns a copy of A with all holes filled in. &quot;&quot;&quot;</span>
+    <span class="n">prev</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="n">prev</span> <span class="o">=</span> <span class="n">pad</span><span class="p">(</span><span class="n">prev</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">pad</span><span class="p">(</span><span class="n">invert</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">connectivity</span> <span class="o">==</span> <span class="mi">8</span><span class="p">:</span>
+      <span class="n">struct</span> <span class="o">=</span> <span class="n">default_struct</span>
+    <span class="k">elif</span> <span class="n">connectivity</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+      <span class="n">struct</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;&#39;connectivity&#39; must be either 8 or 4.&quot;</span><span class="p">)</span>
+    
+    <span class="k">while</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="nb">next</span> <span class="o">=</span> <span class="n">intersection</span><span class="p">(</span><span class="n">dilate</span><span class="p">(</span><span class="n">prev</span><span class="p">,</span> <span class="n">struct</span><span class="p">),</span>  <span class="n">mask</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">equals</span><span class="p">(</span><span class="nb">next</span><span class="p">,</span> <span class="n">prev</span><span class="p">):</span>
+            <span class="k">break</span>
+        <span class="n">prev</span> <span class="o">=</span> <span class="nb">next</span>
+
+    <span class="k">return</span> <span class="n">invert</span><span class="p">(</span><span class="nb">next</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</div>
+<span class="k">def</span> <span class="nf">display</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">figure</span><span class="p">()</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">title</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">interpolation</span> <span class="o">=</span> <span class="s">&#39;none&#39;</span><span class="p">)</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">binary_morphology 0.1 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Tom Myers.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>
